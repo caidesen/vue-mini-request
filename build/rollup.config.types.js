@@ -1,3 +1,4 @@
+import alias from '@rollup/plugin-alias';
 import dts from 'rollup-plugin-dts';
 
 import pkg from '../package.json';
@@ -9,7 +10,8 @@ import RollUpConfig from './rollup.config';
 const TypesConfig = {
   input: RollUpConfig.input,
   output: [{ file: pkg.types, format: 'esm' }],
-  plugins: [dts()],
+  plugins: [alias({ entries: { 'vue-demi': '@vue-mini/wechat' } }), dts()],
+  external: RollUpConfig.external,
 };
 
 export default TypesConfig;
